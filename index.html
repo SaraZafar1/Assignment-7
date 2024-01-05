@@ -1,0 +1,82 @@
+<html> 
+    <head>
+        <style> 
+        
+        </style>
+<script> 
+
+//array a set of things in order (ex. troops are in array)
+//var array = [2, 9, 40, etc] which is the number array 
+//function third () {display.innerHTML = array [2] bc third thing is 2 for computer; }
+//var elementSelected = input.value; display.innerHTML = array[element selected -1];
+//if(elementSelected>0 && elementSelected <= array.length)
+//else {display.innerHTML = "try again, input invalid";}
+
+//function add1toeverything() {for let i=0; i<array.length); i++) {array[i]++; } }
+//function putThisIn() {array.push = getElementById(input).value; )}
+
+//like .length, arrays have .push
+
+
+var inputValue = 0;   
+var one = 0; 
+var two = 0; 
+var arrayRoll = [0,0,0,0,0,0,0,0,0,0,0];
+ 
+function rollAction () {  
+    one = Math.floor(Math.random()*6+1);
+    two = Math.floor(Math.random()*6+1);
+    var rollValue = one+two; 
+    document.getElementById("userRoll").innerHTML = "You rolled a " + rollValue + "."; 
+    arrayRoll[rollValue-2]++; 
+
+    if(one==1) {document.getElementById("firstDie").src = "rollOne.png";}
+    if(two==1) {document.getElementById("secondDie").src = "rollOne.png";}
+    if(one==2) {document.getElementById("firstDie").src = "rollTwo.png";}
+    if(two==2) {document.getElementById("secondDie").src = "rollTwo.png";}
+    if(one==3) {document.getElementById("firstDie").src = "rollThree.png";}
+    if(two==3) {document.getElementById("secondDie").src = "rollThree.png";}
+    if(one==4) {document.getElementById("firstDie").src = "rollFour.png";} 
+    if(two==4) {document.getElementById("secondDie").src = "rollFour.png";}
+    if(one==5) {document.getElementById("firstDie").src = "rollFive.png";} 
+    if(two==5) {document.getElementById("secondDie").src = "rollFive.png";}
+    if(one==6) {document.getElementById("firstDie").src = "rollSix.png";} 
+    if(two==6) {document.getElementById("secondDie").src = "rollSix.png";}
+}
+
+function many () { 
+    inputValue= Number(document.getElementById("howMany").value);
+    var a = 0; 
+    a = arrayRoll[inputValue-2];
+    if(inputValue>12) {document.getElementById("manyCount").innerHTML = "ERROR - You can't roll that!";}
+    else if(inputValue<2){document.getElementById("manyCount").innerHTML = "ERROR - You can't roll that!";}
+    else {document.getElementById("manyCount").innerHTML = a + " time(s)";}
+    document.getElementById("howMany").focus();  
+}
+
+function frequentRoll () { 
+    var track = 0; 
+    var most = 0; 
+    var soFar = 0; 
+    var largest = 0; 
+
+    for (let i=0; i<arrayRoll.length; i++) {track = i; if(arrayRoll[i]>arrayRoll[soFar]) {soFar = track}}
+
+
+    document.getElementById("frequency").innerHTML = "Your most frequent roll: " + (soFar+2); 
+}
+
+</script>
+<title> Dice Roller </title>
+</head>
+<body style="background-color: pink ;"> <center>
+<h1> Roll The Dice! </h1> <br>
+<img id="firstDie" src="rollOne.png" height="100px" width="100px">  <img id="secondDie" src="rollOne.png" height="100px" width="100px"> 
+
+<h3> Die One             |              Die Two </h3> 
+<p id="userRoll"> You rolled a _ </p> <button id="roll" onclick="rollAction()"> Roll Dice </button> <br> <br>
+How many times did you roll a(n) <input id="howMany" maxlength="2" size="10" style="height: 30px">? <br> <button id="press" onclick="many()"> Calculate </button> <br> <p id="manyCount"> _ time(s) </p> <br>
+ <p id="frequency"> Your most frequent roll: </p> <button onclick="frequentRoll()"> Calculate </button>
+</center>
+</body>
+</html>
